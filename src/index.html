@@ -5,12 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ '/css/style.css' | url }}" />
+    <script>
+      
+      const getData = () => {
+        const myRequest = new Request('https://api.tfl.gov.uk/Line/victoria/Arrivals?app_id=PersonalTest&app_key=8f3ce437f95645d68849d490d34114f5');
+        return fetch(myRequest)
+      }
+      
+      const formatItem = (item) => {
+        return `<div style='color: green; padding: 5px'>${item.destinationName}</div>`
+      }
+
+      const start = async () => {
+        result = await getData();
+        const element = document.getElementById('api_response_data');
+        const travelData = await result.json();
+        
+        let response = '';
+        for (i = 0; i < travelData.length; i++){
+          response += formatItem(travelData[i]);
+        }
+        element.innerHTML = response;
+      }
+
+      start()
+    </script>
   </head>
   <body>
     <header>
       <h1>Pinch Cafe</h1>
       <p>We are here to normalise vegan food without compromising on the taste and quality</p>
     </header>
+    <div id="api_response_data"></div>
     <main></main>
   </body>
 </html>
+
+
