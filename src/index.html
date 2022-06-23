@@ -8,12 +8,18 @@
     <script>
       
       const getData = () => {
-        const myRequest = new Request('https://api.tfl.gov.uk/Line/victoria/Arrivals?app_id=PersonalTest&app_key=8f3ce437f95645d68849d490d34114f5');
+        const myRequest = new Request('https://api.tfl.gov.uk/Line/northern/Arrivals?app_id=PersonalTest&app_key=8f3ce437f95645d68849d490d34114f5');
         return fetch(myRequest)
       }
       
       const formatItem = (item) => {
-        return `<div style='color: green; padding: 5px'>${item.destinationName}</div>`
+        return `<div style='background-color: gray; margin: 5px; padding: 5px'>
+            
+            <div><span>Start: </span><span>${item.stationName}</div>
+            <div><span>Destination: </span><span>${item.destinationName}</div>
+            <div><span>Current location:</span><span>${item.currentLocation}</div>
+            <div><span>Expected:</span><span>${item.timeToLive}</div>
+          </div>`
       }
 
       const start = async () => {
@@ -27,7 +33,6 @@
         }
         element.innerHTML = response;
       }
-
       start()
     </script>
   </head>
@@ -36,6 +41,7 @@
       <h1>Pinch Cafe</h1>
       <p>We are here to normalise vegan food without compromising on the taste and quality</p>
     </header>
+    <h4>Northern Line stops</h4>
     <div id="api_response_data"></div>
     <main></main>
   </body>
