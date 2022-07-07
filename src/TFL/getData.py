@@ -8,4 +8,5 @@ def readFile(theFilename):
   return result
 
 jsonData = json.loads(readFile("secrets.json"))
-print(jsonData)
+print(jsonData["tfl"]["app_id"])
+print(jsonData["tfl"]["app_key"])
