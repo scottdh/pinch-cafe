@@ -33,7 +33,7 @@
       // Do the actual get-file-from-server action.
       const getTFLData = () => {
         const myRequest = new Request("https://www.sansay.co.uk/webconsole/hy6a5ak6b1lmnpl1/TFLData.json");
-        return fetch(myRequest)
+        return fetch(myRequest);
       }
       
       const formatItem = (item) => {
@@ -48,7 +48,7 @@
       // Ran once at startup time.
       const start = async () => {
         // Figure out the serverEndpointString value.
-        pathnameSplit = window.location.pathname.split("/")
+        pathnameSplit = window.location.pathname.split("/");
         pathnameSplit.pop();
         pathnameSplit.pop();
         serverEndpointString = pathnameSplit.join("/");
@@ -58,7 +58,7 @@
         // Fetch TFL data every minute.
         TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
       }
-      start()
+      start();
     </script>
   </head>
   <body style="width:100%;">
