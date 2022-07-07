@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ 'css/style.css' | url }}" />
+    <script>
+      // A global variable to hold configuration data that we fetch from the server.
+      var configData;
+      
+      // A global variable to record a string to prepend to URLs before requests - this project is hosted in
+      // two different locations with subtly different setups.
+      var serverEndpointString;
+      
+      // Trigger the Task on the server to go and get data from TFL's API...
+      function triggerTFLDataFetch() {
+        const myRequest = new Request(serverEndpointString + "/api/runTask?taskID=" + configData["TFLTaskID"]);
+        fetch(myRequest);
+        TFLDataFetchTimeout = setTimeout(completeTFLDataFetch, 10000);
+      }
+      
+      // ...and after 10 seconds, trigger another function to pick that data up from the server and place it, formatted, on the page.
+      async function completeTFLDataFetch() {
+        result = await getTFLData();
+        const element = document.getElementById('api_response_data');
+        const travelData = await result.json();
+        
+        let response = '';
+        for (i = 0; i < travelData.length; i++){
+          response += formatItem(travelData[i]);
+        }
+        element.innerHTML = response;
+      }
+      
+      // Do the actual get-file-from-server action.
+      const getTFLData = () => {
+        const myRequest = new Request('TFLData.json');
+        return fetch(myRequest)
+      }
+      
+      const formatItem = (item) => {
+        return `<div style='background-color: gray; color:white; margin: 5px; padding: 5px'>
+            <div><span>Start: </span><span>${item.stationName}</div>
+            <div><span>Destination: </span><span>${item.destinationName}</div>
+            <div><span>Current location:</span><span>${item.currentLocation}</div>
+            <div><span>Expected:</span><span>${item.timeToLive}</div>
+          </div>`
+      }
+
+      // Ran once at startup time.
+      const start = async () => {
+        // Get the config data from the server.
+        const configDataRequest = new Request("config.json");
+        configDataResult = await fetch(configDataRequest);
+        configData = await configDataResult.json();
+        
+        // Figure out the serverEndpointString value.
+        pathnameSplit = window.location.pathname.split("/")
+        pathnameSplit.pop();
+        pathnameSplit.pop();
+        serverEndpointString = pathnameSplit.join("/");
+        
+        // Do a one-off fetch of TFL data so we're not sat looking at a blank screen on inital load.
+        completeTFLDataFetch();
+        // Fetch TFL data every minute.
+        TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
+      }
+      start()
+    </script>
+  </head>
+  <body style="width:100%;">
+    <header style="width:100%;">
+      <h1 style="text-align:center;">Pinch Cafe</h1>
+      <p style="text-align:center;">We are here to normalise vegan food without compromising on the taste and quality</p>
+    </header>
+    <main style="width:100%;">
+      <table style="width:100%;">
+        <tr>
+          <td valign="top" style="width:50%; background-color:#D6EEEE;">
+            <h4 style="text-align:center;">Menu</h4>
+          </td>
+          <td style="width:50%;">
+            <table style="width:100%;">
+              <tr>
+                <td style="background-color:#EEEEEE;">
+                  <h4>Northern Line Stops</h4>
+                  <div id="api_response_data"></div>
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color:#999999;">
+                  <h4>Bottom Right Section</h4>
+                </td>
+              </tr>
+          </td>
+        </tr>
+      </table>
+    </main>
+  </body>
+</html>
