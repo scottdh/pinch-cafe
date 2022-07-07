@@ -8,4 +8,4 @@ def readFile(theFilename):
   return result
 
 jsonData = json.loads(readFile("config.json"))
-print(jsonData))
+print(jsonData)
