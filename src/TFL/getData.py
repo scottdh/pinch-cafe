@@ -8,4 +8,6 @@ def readFile(theFilename):
   return result
 
 jsonData = json.loads(readFile("secrets.json"))
-print("https://api.tfl.gov.uk/Line/northern/Arrivals?app_id=" + jsonData["tfl"]["app_id"] + "&app_key=" + jsonData["tfl"]["app_key"])
+curlCommand = "curl https://api.tfl.gov.uk/Line/northern/Arrivals?app_id=" + jsonData["tfl"]["app_id"] + "\&app_key=" + jsonData["tfl"]["app_key"] + " --output /etc/webconsole/tasks/hy6a5ak6b1lmnpl1/www/TFLData.json 2>&1"
+print(curlCommand)
+os.system(curlCommand)
