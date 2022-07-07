@@ -6,6 +6,11 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ '/css/style.css' | url }}" />
     <script>
+      function triggerTFLDataFetch() {
+        console.log("Fetching new TFL data...");
+        const myRequest = new Request("webconsole/api/runTask?taskID=lv04p52ns6fqnbzi");
+        fetch(myRequest);
+      }
       
       const getData = () => {
         const myRequest = new Request('https://api.tfl.gov.uk/Line/northern/Arrivals?app_id=PersonalTest&app_key=8f3ce437f95645d68849d490d34114f5');
@@ -23,6 +28,8 @@
       }
 
       const start = async () => {
+        TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
+        
         result = await getData();
         const element = document.getElementById('api_response_data');
         const travelData = await result.json();
