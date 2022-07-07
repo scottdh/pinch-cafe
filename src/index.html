@@ -6,6 +6,8 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ '/css/style.css' | url }}" />
     <script>
+      var TFLTaskID = "";
+      
       // Trigger the Task on the server to go and get data from TFL's API...
       function triggerTFLDataFetch() {
         console.log("Fetching new TFL data...");
@@ -43,6 +45,9 @@
       }
 
       const start = async () => {
+        const configDataRequest = new Request("config.json");
+        configData = fetch(configDataRequest);
+        console.log(configData);
         triggerTFLDataFetch();
         TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
       }
