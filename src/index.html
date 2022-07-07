@@ -46,7 +46,7 @@
 
       const start = async () => {
         const configDataRequest = new Request("config.json");
-        configData = fetch(configDataRequest);
+        configData = await fetch(configDataRequest);
         console.log(configData);
         triggerTFLDataFetch();
         TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
