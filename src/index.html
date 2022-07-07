@@ -51,9 +51,11 @@
         configData = await configDataResult.json();
         
         // Figure out the serverEndpointString value.
+        console.log(window.location.pathname);
         pathnameSplit = window.location.pathname.split("/")
         pathnameSplit.pop();
         serverEndpointString = "/" + pathnameSplit.join("/");
+        console.log(serverEndpointString);
         
         triggerTFLDataFetch();
         TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
