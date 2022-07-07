@@ -8,5 +8,4 @@ def readFile(theFilename):
   return result
 
 jsonData = json.loads(readFile("secrets.json"))
-print(jsonData["tfl"]["app_id"])
-print(jsonData["tfl"]["app_key"])
+print("https://api.tfl.gov.uk/Line/northern/Arrivals?app_id=" + jsonData["tfl"]["app_id"] + "&app_key=" + jsonData["tfl"]["app_key"])
