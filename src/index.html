@@ -56,7 +56,7 @@
         pathnameSplit.pop();
         serverEndpointString = pathnameSplit.join("/");
         
-        triggerTFLDataFetch();
+        completeTFLDataFetch();
         TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
       }
       start()
