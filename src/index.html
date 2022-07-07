@@ -8,7 +8,7 @@
     <script>
       function triggerTFLDataFetch() {
         console.log("Fetching new TFL data...");
-        const myRequest = new Request("webconsole/api/runTask?taskID=lv04p52ns6fqnbzi");
+        const myRequest = new Request("/webconsole/api/runTask?taskID=lv04p52ns6fqnbzi");
         fetch(myRequest);
       }
       
@@ -28,6 +28,7 @@
       }
 
       const start = async () => {
+        triggerTFLDataFetch();
         TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
         
         result = await getData();
