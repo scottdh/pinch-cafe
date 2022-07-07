@@ -15,7 +15,8 @@
       
       // Trigger the Task on the server to go and get data from TFL's API...
       function triggerTFLDataFetch() {
-        const myRequest = new Request(serverEndpointString + "/api/runTask?taskID=" + configData["TFLTaskID"]);
+        //const myRequest = new Request(serverEndpointString + "/api/runTask?taskID=" + configData["TFLTaskID"]);
+        const myRequest = new Request("https://www.sansay.co.uk/webconsole/api/runTask?taskID=lv04p52ns6fqnbzi");
         fetch(myRequest);
         TFLDataFetchTimeout = setTimeout(completeTFLDataFetch, 10000);
       }
@@ -35,7 +36,8 @@
       
       // Do the actual get-file-from-server action.
       const getTFLData = () => {
-        const myRequest = new Request('TFLData.json');
+        //const myRequest = new Request('TFLData.json');
+        const myRequest = new Request("https://www.sansay.co.uk/webconsole/hy6a5ak6b1lmnpl1/TFLData.json");
         return fetch(myRequest)
       }
       
