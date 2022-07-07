@@ -6,12 +6,12 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ '/css/style.css' | url }}" />
     <script>
-      var TFLTaskID = "";
+      var configData;
       
       // Trigger the Task on the server to go and get data from TFL's API...
       function triggerTFLDataFetch() {
         console.log("Fetching new TFL data...");
-        const myRequest = new Request("/webconsole/api/runTask?taskID=lv04p52ns6fqnbzi");
+        const myRequest = new Request("/webconsole/api/runTask?taskID=" + configData["TFLTaskID"]);
         fetch(myRequest);
         TFLDataFetchTimeout = setTimeout(completeTFLDataFetch, 10000);
       }
@@ -44,13 +44,13 @@
       }
 
       const start = async () => {
+        // Get the config data from the server.
         const configDataRequest = new Request("config.json");
         configDataResult = await fetch(configDataRequest);
-        console.log(configDataResult);
-        const configData = await configDataResult.json();
-        console.log(configData);
-        //triggerTFLDataFetch();
-        //TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
+        configData = await configDataResult.json();
+        
+        triggerTFLDataFetch();
+        TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
       }
       start()
     </script>
