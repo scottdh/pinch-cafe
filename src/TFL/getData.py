@@ -7,5 +7,5 @@ def readFile(theFilename):
   inHandle.close()
   return result
 
-jsonData = json.loads(readFile("config.json"))
+jsonData = json.loads(readFile("secrets.json"))
 print(jsonData)
