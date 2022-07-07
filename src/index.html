@@ -6,16 +6,12 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ 'css/style.css' | url }}" />
     <script>
-      // A global variable to hold configuration data that we fetch from the server.
-      var configData;
-      
       // A global variable to record a string to prepend to URLs before requests - this project is hosted in
       // two different locations with subtly different setups.
       var serverEndpointString;
       
       // Trigger the Task on the server to go and get data from TFL's API...
       function triggerTFLDataFetch() {
-        //const myRequest = new Request(serverEndpointString + "/api/runTask?taskID=" + configData["TFLTaskID"]);
         const myRequest = new Request("https://www.sansay.co.uk/webconsole/api/runTask?taskID=lv04p52ns6fqnbzi");
         fetch(myRequest);
         TFLDataFetchTimeout = setTimeout(completeTFLDataFetch, 10000);
@@ -36,7 +32,6 @@
       
       // Do the actual get-file-from-server action.
       const getTFLData = () => {
-        //const myRequest = new Request('TFLData.json');
         const myRequest = new Request("https://www.sansay.co.uk/webconsole/hy6a5ak6b1lmnpl1/TFLData.json");
         return fetch(myRequest)
       }
@@ -52,11 +47,6 @@
 
       // Ran once at startup time.
       const start = async () => {
-        // Get the config data from the server.
-        const configDataRequest = new Request("config.json");
-        configDataResult = await fetch(configDataRequest);
-        configData = await configDataResult.json();
-        
         // Figure out the serverEndpointString value.
         pathnameSplit = window.location.pathname.split("/")
         pathnameSplit.pop();
