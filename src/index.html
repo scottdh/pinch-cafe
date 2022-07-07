@@ -13,7 +13,8 @@
         TFLDataFetchTimeout = setTimeout(getTFLData, 10000);
       }
       
-      function getTFLData() {
+      async function getTFLData() {
+      //const getTFLData = async () => {
         result = await getData();
         const element = document.getElementById('api_response_data');
         const travelData = await result.json();
