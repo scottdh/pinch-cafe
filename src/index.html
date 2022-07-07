@@ -6,16 +6,17 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ '/css/style.css' | url }}" />
     <script>
+      // Trigger the Task on the server to go and get data from TFL's API...
       function triggerTFLDataFetch() {
         console.log("Fetching new TFL data...");
         const myRequest = new Request("/webconsole/api/runTask?taskID=lv04p52ns6fqnbzi");
         fetch(myRequest);
-        TFLDataFetchTimeout = setTimeout(getTFLData, 10000);
+        TFLDataFetchTimeout = setTimeout(completeTFLDataFetch, 10000);
       }
       
-      async function getTFLData() {
-      //const getTFLData = async () => {
-        result = await getData();
+      // ...After 10 seconds, trigger another function to pick that data up from the server and place it, formatted, on the page.
+      async function completeTFLDataFetch() {
+        result = await getTFLData();
         const element = document.getElementById('api_response_data');
         const travelData = await result.json();
         
@@ -26,7 +27,7 @@
         element.innerHTML = response;
       }
       
-      const getData = () => {
+      const getTFLData = () => {
         const myRequest = new Request('https://api.tfl.gov.uk/Line/northern/Arrivals?app_id=PersonalTest&app_key=8f3ce437f95645d68849d490d34114f5');
         return fetch(myRequest)
       }
