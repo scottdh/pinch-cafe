@@ -10,6 +10,19 @@
         console.log("Fetching new TFL data...");
         const myRequest = new Request("/webconsole/api/runTask?taskID=lv04p52ns6fqnbzi");
         fetch(myRequest);
+        TFLDataFetchTimeout = setTimeout(getTFLData, 10000);
+      }
+      
+      function getTFLData() {
+        result = await getData();
+        const element = document.getElementById('api_response_data');
+        const travelData = await result.json();
+        
+        let response = '';
+        for (i = 0; i < travelData.length; i++){
+          response += formatItem(travelData[i]);
+        }
+        element.innerHTML = response;
       }
       
       const getData = () => {
@@ -19,7 +32,6 @@
       
       const formatItem = (item) => {
         return `<div style='background-color: gray; color:white; margin: 5px; padding: 5px'>
-            
             <div><span>Start: </span><span>${item.stationName}</div>
             <div><span>Destination: </span><span>${item.destinationName}</div>
             <div><span>Current location:</span><span>${item.currentLocation}</div>
@@ -30,16 +42,6 @@
       const start = async () => {
         triggerTFLDataFetch();
         TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
-        
-        result = await getData();
-        const element = document.getElementById('api_response_data');
-        const travelData = await result.json();
-        
-        let response = '';
-        for (i = 0; i < travelData.length; i++){
-          response += formatItem(travelData[i]);
-        }
-        element.innerHTML = response;
       }
       start()
     </script>
