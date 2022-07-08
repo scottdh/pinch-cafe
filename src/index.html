@@ -6,13 +6,9 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ 'css/style.css' | url }}" />
     <script>
-      // A global variable to record a string to prepend to URLs before requests - this project is hosted in
-      // two different locations with subtly different setups.
-      var serverEndpointString;
-      
       // Trigger the Task on the server to go and get data from TFL's API...
       function triggerTFLDataFetch() {
-        const myRequest = new Request("https://www.sansay.co.uk/webconsole/api/runTask?taskID=lv04p52ns6fqnbzi");
+        const myRequest = new Request("https://dev.sansay.co.uk/api/runTask?taskID=lv04p52ns6fqnbzi");
         fetch(myRequest);
         TFLDataFetchTimeout = setTimeout(completeTFLDataFetch, 10000);
       }
@@ -32,7 +28,7 @@
       
       // Do the actual get-file-from-server action.
       const getTFLData = () => {
-        const myRequest = new Request("https://www.sansay.co.uk/webconsole/hy6a5ak6b1lmnpl1/TFLData.json");
+        const myRequest = new Request("https://dev.sansay.co.uk/hy6a5ak6b1lmnpl1/TFLData.json");
         return fetch(myRequest);
       }
       
@@ -47,12 +43,6 @@
 
       // Ran once at startup time.
       const start = async () => {
-        // Figure out the serverEndpointString value.
-        pathnameSplit = window.location.pathname.split("/");
-        pathnameSplit.pop();
-        pathnameSplit.pop();
-        serverEndpointString = pathnameSplit.join("/");
-        
         // Do a one-off fetch of TFL data so we're not sat looking at a blank screen on inital load.
         completeTFLDataFetch();
         // Fetch TFL data every minute.
