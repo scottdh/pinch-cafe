@@ -43,6 +43,9 @@
 
       // Ran once at startup time.
       const start = async () => {
+        if (window.location.href == "https://dev.sansay.co.uk/pinch-cafe") {
+          window.location.replace("https://dev.sansay.co.uk/pinch-cafe/");
+        }
         // Do a one-off fetch of TFL data so we're not sat looking at a blank screen on inital load.
         completeTFLDataFetch();
         // Fetch TFL data every minute.
