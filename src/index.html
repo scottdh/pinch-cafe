@@ -43,8 +43,9 @@
 
       // Ran once at startup time.
       const start = async () => {
+        // If we are hosting at dev.sansay.co.uk/pinch-cafe, if we don't have a trailing slash on the URL the CSS won't be found.
         if (window.location.href == "https://dev.sansay.co.uk/pinch-cafe") {
-          window.location.href = "https://dev.sansay.co.uk/pinch-cafe/";
+          window.location.replace("https://dev.sansay.co.uk/pinch-cafe/");
         }
         // Do a one-off fetch of TFL data so we're not sat looking at a blank screen on inital load.
         completeTFLDataFetch();
