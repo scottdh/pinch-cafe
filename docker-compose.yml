@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  node:
+    image: node:18-alpine
+    user: node
+    working_dir: /app
+    environment:
+      - NPM_CONFIG_LOGLEVEL=info
+      - NODE_ENV=development
+    volumes:
+      - ./:/app/
+    ports:
+      - 8080:8080
+    command: sh -c "cd /app/ && npm install && npm run start"
