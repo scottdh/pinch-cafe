@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ 'css/style.css' | url }}" />
+    <link
+      rel="stylesheet"
+      media="print"
+      href="/fonts/fonts.css"
+      onload="this.media='all'"
+    />
     <script>
       // Trigger the Task on the server to go and get data from TFL's API...
       function triggerTFLDataFetch() {
