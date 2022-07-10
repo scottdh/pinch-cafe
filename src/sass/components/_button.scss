@@ -1,0 +1,32 @@
+button,
+.button {
+  cursor: pointer;
+  padding: 0.5em 1em;
+  border-width: 2px;
+  border-style: solid;
+  color: var(--color-button_label);
+  font-weight: var(--fw-bold);
+  background-color: var(--color-button_bg);
+  line-height: 1.3; // must be same as form field
+  border-radius: 2em; // must be same as form field
+  transition: background-color 0.25s;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: var(--color-button_bg--hover);
+      color: var(--color-button_label--hover);
+    }
+  }
+  &[data-type="primary"] {
+    background-color: var(--color-button--primary_bg);
+    color: var(--color-button--primary_label);
+    border-color: var(--color-button--primary_bg);
+
+    &:hover {
+      background-color: var(--color-button--primary_bg--hover);
+      border-color: var(--color-button--primary_bg--hover);
+    }
+  }
+  &[data-width="full"] {
+    width: 100%;
+  }
+}

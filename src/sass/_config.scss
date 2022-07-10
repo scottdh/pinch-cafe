@@ -74,12 +74,12 @@ $color-palette: (
   "lemonade900": hsl(43, 85%, 21%),
   "berry100": hsl(0, 100%, 98%),
   "berry200": hsl(0, 100%, 93%),
-  "berry300": hsl(0, 100%, 88%),
-  "berry400": hsl(0, 87%, 76%),
-  "berry500": hsl(0, 83%, 61%),
-  "berry600": hsl(0, 57%, 51%),
-  "berry700": hsl(0, 55%, 45%),
-  "berry800": hsl(0, 55%, 39%),
+  "berry300": hsl(359, 100%, 77%),
+  "berry400": hsl(360, 100%, 70%),
+  "berry500": hsl(360, 100%, 67%),
+  "berry600": hsl(360, 75%, 60%),
+  "berry700": hsl(360, 57%, 54%),
+  "berry800": hsl(359, 49%, 47%),
   "berry900": hsl(355, 53%, 29%),
   "berry1000": hsl(355, 53%, 19%),
   "salt100": hsl(0, 0%, 100%),
@@ -99,7 +99,7 @@ $color-palette: (
 );
 
 $light-colors: (
-  "primary": map-get($color-palette, "berry500"),
+  "tint-primary": map-get($color-palette, "berry500"),
   "text--primary": map-get($color-palette, "salt1000"),
   "text--secondary": map-get($color-palette, "salt900"),
   "button_bg": transparent,
@@ -107,9 +107,9 @@ $light-colors: (
   "button_border": map-get($color-palette, "berry500"),
   "button_bg--hover": map-get($color-palette, "berry200"),
   "button--primary_bg": map-get($color-palette, "berry500"),
-  "button--primary_label": map-get($color-palette, "white"),
-  "button--primary_border": map-get($color-palette, "berry500"),
-  "button--primary_bg--hover": map-get($color-palette, "berry300"),
+  "button--primary_label": map-get($color-palette, "salt100"),
+  "button--primary_border": map-get($color-palette, "berry400"),
+  "button--primary_bg--hover": map-get($color-palette, "berry400"),
   "z0": map-get($color-palette, "salt200"),
   "z1": map-get($color-palette, "salt100"),
 );
@@ -155,6 +155,11 @@ $gorko-config: (
       "regular": 500,
       "bold": 700,
     ),
+    "align": (
+      "center": "center",
+      "left": "left",
+      "right": "right",
+    ),
   ),
   "bg": (
     "items": "color",
@@ -191,6 +196,12 @@ $gorko-config: (
     "css-vars": true,
     "output": "standard",
     "property": "line-height",
+  ),
+  "align": (
+    "items": "align",
+    "css-vars": true,
+    "output": "standard",
+    "property": "text-align",
   ),
   "gap-top": (
     "items": $gorko-size-scale,
