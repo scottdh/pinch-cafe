@@ -11,3 +11,5 @@ This is a community project - we meet up in Pinch Cafe every other Thursday even
 If you want a local development version installed on your local machine you will need Node.js installed.
 
 The hosted version used in the cafe can be found [here](https://dev.sansay.co.uk/pinch-cafe).
+
+The screen in Pinch Cafe is driven by a Raspberry Pi 3 running as a simple web kiosk, configured using the "configKiosk" available [here](https://github.com/dhicks6345789/device-config).
