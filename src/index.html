@@ -11,9 +11,11 @@
     <script src="https://dev.sansay.co.uk/webconsole.js"></script>
     
     <script>
+      // A global variable to hold the interval reference for the TFL data fetching function.
+      var TFLDataFetchInterval;
+      
       // Parse the TFL data, get it formatted on the page.
       function handleTFLData(result) {
-        console.log("HandleTFLData!");
         const travelData = JSON.parse(result);
         const element = document.getElementById('api_response_data');
         
@@ -32,6 +34,13 @@
             <div><span>Expected:</span><span>${item.timeToLive}</div>
           </div>`
       }
+      
+      // Fetch TFL data.
+      function fetchTFLData() {
+        webconsole.APITask("lv04p52ns6fqnbzi", function(result) {
+          handleTFLData(result);
+        }, pollPeriod=5, APIURLPrefix="/");
+      }
 
       // This function is run once at page load time.
       function start() {
@@ -40,12 +49,10 @@
           window.location.replace("https://dev.sansay.co.uk/pinch-cafe/");
         }
         
-        // Fetch TFL data.
-        webconsole.APITask("lv04p52ns6fqnbzi", function(result) {
-          handleTFLData(result);
-        }, pollPeriod=5, APIURLPrefix="/");
-        // Fetch TFL data every minute.
-        // TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
+        // Do a one-off TFL data fetch just so we're not sat looking at a blank screen for a minute.
+        fetchTFLData();
+        // Do a TFL data fetch once a minute.
+        TFLDataFetchInterval = setInterval(fetchTFLData, 60000);
       }
     </script>
   </head>
