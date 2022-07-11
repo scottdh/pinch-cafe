@@ -11,30 +11,16 @@
     <script src="https://dev.sansay.co.uk/webconsole.js"></script>
     
     <script>
-      // Trigger the Task on the server to go and get data from TFL's API...
-      function triggerTFLDataFetch() {
-        const myRequest = new Request("https://dev.sansay.co.uk/api/runTask?taskID=");
-        fetch(myRequest);
-        TFLDataFetchTimeout = setTimeout(completeTFLDataFetch, );
-      }
-      
-      // ...and after 10 seconds, trigger another function to pick that data up from the server and place it, formatted, on the page.
-      async function completeTFLDataFetch() {
-        result = await getTFLData();
+      // Parse the TFL data, get it formatted on the page.
+      function handleTFLData(result) {
+        const travelData = JSON.parse(result);
         const element = document.getElementById('api_response_data');
-        const travelData = await result.json();
         
         let response = '';
         for (i = 0; i < travelData.length; i++){
           response += formatItem(travelData[i]);
         }
         element.innerHTML = response;
-      }
-      
-      // Do the actual get-file-from-server action.
-      const getTFLData = () => {
-        const myRequest = new Request("https://dev.sansay.co.uk/lv04p52ns6fqnbzi/output.json");
-        return fetch(myRequest);
       }
       
       const formatItem = (item) => {
@@ -46,22 +32,23 @@
           </div>`
       }
 
-      // Ran once at startup time.
-      const start = async () => {
+      // This function is run once at page load time.
+      function start() {
         // If we are hosting at dev.sansay.co.uk/pinch-cafe, if we don't have a trailing slash on the URL the CSS won't be found.
         if (window.location.href == "https://dev.sansay.co.uk/pinch-cafe") {
           window.location.replace("https://dev.sansay.co.uk/pinch-cafe/");
         }
+        
+        // Fetch TFL data.
         webconsole.APITask("lv04p52ns6fqnbzi", function(result) {
           console.log(result);
         }, pollPeriod=5, APIURLPrefix="/");
         // Fetch TFL data every minute.
         // TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
       }
-      start();
     </script>
   </head>
-  <body>
+  <body onload="start();">
     <header>
       <h1 class="align-center">Pinch Cafe</h1>
       <p class="align-center">We are here to normalise vegan food without compromising on the taste and quality</p>
