@@ -13,6 +13,7 @@
     <script>
       // Parse the TFL data, get it formatted on the page.
       function handleTFLData(result) {
+        console.log("HandleTFLData!");
         const travelData = JSON.parse(result);
         const element = document.getElementById('api_response_data');
         
