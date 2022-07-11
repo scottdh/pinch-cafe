@@ -52,7 +52,9 @@
         if (window.location.href == "https://dev.sansay.co.uk/pinch-cafe") {
           window.location.replace("https://dev.sansay.co.uk/pinch-cafe/");
         }
-        webconsole.APITask("lv04p52ns6fqnbzi", pollPeriod=5, APIURLPrefix="/");
+        webconsole.APITask("lv04p52ns6fqnbzi", function(result) {
+          console.log(result);
+        }, pollPeriod=5, APIURLPrefix="/");
         // Fetch TFL data every minute.
         // TFLDataFetchInterval = setInterval(triggerTFLDataFetch, 60000);
       }
