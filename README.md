@@ -1,6 +1,6 @@
 # Pinch Cafe
 
-A dashboard-style page to be displayed in the lobby of Pinch Cafe, Tooting Works, Tooting, London.
+A dashboard-style page to be displayed on a public 42" TV screen in the lobby of Pinch Cafe, Tooting Works, Tooting, London.
 
 Includes the cafe's menu, times for various nearby public transport, and whatever else we feel might be handy.
 
