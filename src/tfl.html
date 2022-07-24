@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ 'css/style.css' | url }}" />
+    <link rel="stylesheet" media="print" href="fonts/fonts.css" onload="this.media='all'" />
+    <!-- The Webconsole Javascript library. -->
+    <script src="https://dev.sansay.co.uk/webconsole.js"></script>
+    <script>
+    // A global variable to hold the interval reference for the TFL data fetching function.
+    var TFLDataFetchInterval;
+
+    // Parse the TFL data, get it formatted on the page.
+    function handleTFLData(result) {
+        const travelData = JSON.parse(result);
+        const element = document.getElementById('api_response_data');
+
+        let response = '';
+        for (i = 0; i < travelData.length; i++) {
+            response += formatItem(travelData[i]);
+        }
+        element.innerHTML = response;
+    }
+
+    const formatItem = (item) => {
+        return `<div style='background-color: gray; color:white; margin: 5px; padding: 5px'>
+            <div><span>Start: </span><span>${item.stationName}</div>
+            <div><span>Destination: </span><span>${item.destinationName}</div>
+            <div><span>Current location:</span><span>${item.currentLocation}</div>
+            <div><span>Expected:</span><span>${item.timeToLive}</div>
+          </div>`
+    }
+
+    // Fetch TFL data.
+    function fetchTFLData() {
+        webconsole.APITask("lv04p52ns6fqnbzi", function(result) {
+            handleTFLData(result);
+        }, pollPeriod = 5, APIURLPrefix = "https://dev.sansay.co.uk/");
+    }
+
+    // This function is run once at page load time.
+    function start() {
+        // If we are hosting at dev.sansay.co.uk/pinch-cafe, if we don't have a trailing slash on the URL the CSS won't be found.
+        if (window.location.href == "https://dev.sansay.co.uk/pinch-cafe") {
+            window.location.replace("https://dev.sansay.co.uk/pinch-cafe/");
+        }
+
+        // Do a one-off TFL data fetch just so we're not sat looking at a blank screen for a minute.
+        fetchTFLData();
+        // Do a TFL data fetch once a minute.
+        TFLDataFetchInterval = setInterval(fetchTFLData, 60000);
+    }
+    </script>
+</head>
+
+<body onload="start();">
+    <header>
+        <h1 class="align-center">Pinch Cafe</h1>
+        <p class="align-center">We are here to normalise vegan food without compromising on the taste and quality.</p>
+    </header>
+    <main>
+        <table style="width:100%;">
+            <tr>
+                <td valign="top" style="width:50%; background-color:#D6EEEE;">
+                    <h4 style="text-align:center;">Menu</h4>
+                    <button data-type="primary">Primary button</button>
+                </td>
+                <td style="width:50%;">
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="background-color:#EEEEEE;">
+                                <h4>Northern Line Stops</h4>
+                                <div id="api_response_data"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:#999999;">
+                                <h4>Bottom Right Section</h4>
+                            </td>
+                        </tr>
+                </td>
+            </tr>
+        </table>
+    </main>
+</body>
+
+</html>
