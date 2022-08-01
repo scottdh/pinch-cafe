@@ -26,6 +26,10 @@ The hosted version used in the cafe is hosted on a server running [Web Console](
 
 [Hosted version](https://dev.sansay.co.uk/pinch-cafe) of the display screen.
 
+The work-in-progress [menu](https://dev.sansay.co.uk/pinch-cafe/menu/) page.
+
+The work-in-progress [TFL](https://dev.sansay.co.uk/pinch-cafe/tfl/) page.
+
 Web Console [task](https://dev.sansay.co.uk/view?taskID=pinch-cafe) to build the Github project.
 
 Shared Google Drive [folder](https://drive.google.com/drive/folders/1JYy3Vd2T3y7-sOH_7hZktn-4Ax8KW_RJ?usp=sharing) for display content.
