@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="{{ 'css/style.css' | url }}" />
+        <link rel="stylesheet" media="print" href="fonts/fonts.css" onload="this.media='all'" />
+        
+        <!-- The Webconsole Javascript library. -->
+        <script src="https://dev.sansay.co.uk/webconsole.js"></script>
+        
+        <script>
+            // A global variable to hold the interval reference for the TFL data fetching function.
+            var TFLDataFetchInterval;
+            
+            // Parse the TFL data, get it formatted on the page.
+            function handleTFLData(result) {
+                const travelData = JSON.parse(result);
+                const element = document.getElementById('api_response_data');
+                
+                let response = '';
+                for (i = 0; i < travelData.length; i++) {
+                    response += formatItem(travelData[i]);
+                }
+                element.innerHTML = response;
+            }
+            
+            const formatItem = (item) => {
+                return `<div style='background-color: gray; color:white; margin: 5px; padding: 5px'>
+                <div><span>Start: </span><span>${item.stationName}</div>
+                <div><span>Destination: </span><span>${item.destinationName}</div>
+                <div><span>Current location:</span><span>${item.currentLocation}</div>
+                <div><span>Expected:</span><span>${item.timeToLive}</div>
+                </div>`
+            }
+            
+            // Fetch TFL data.
+            function fetchTFLData() {
+                //webconsole.APITask("lv04p52ns6fqnbzi", handleTFLData, 5, "https://dev.sansay.co.uk/");
+                webconsole.APITask("lv04p52ns6fqnbzi", function(result) {}, 5, "https://dev.sansay.co.uk/");
+            }
+            
+            // This function is run once at page load time.
+            function start() {
+                // If we are hosting at dev.sansay.co.uk/pinch-cafe, if we don't have a trailing slash on the URL the CSS won't be found.
+                if (window.location.href == "https://dev.sansay.co.uk/pinch-cafe") {
+                    window.location.replace("https://dev.sansay.co.uk/pinch-cafe/");
+                }
+                
+                // Do a one-off TFL data fetch just so we're not sat looking at a blank screen for a minute.
+                fetchTFLData();
+                // Do a TFL data fetch once a minute.
+                TFLDataFetchInterval = setInterval(fetchTFLData, 60000);
+            }
+        </script>
+        <style>
+            .column {
+                float:left;
+            }
+            .row {
+                display:flex;
+            }
+            .row:after {
+                content:"";
+                display:table;
+                clear:both;
+            }
+        </style>
+    </head>
+    <body onload="start();" style="margin:0px; padding:0px; border:0px; width:100%; background-color:black;">
+        <div class="row" style="width:100%;">
+            <div class="column" style="margin:0px; padding:0px; border:0px; width:25%; background-color:black;">
+                <iframe style="margin:0px; padding:0px; border:0px;" src="https://dev.sansay.co.uk/lv04p52ns6fqnbzi/index.html" frameborder="0" width="100%" height="1071px" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <div class="column" style="margin:0px; padding:0px; border:0px; width:75%; background-color:black;">
+                <iframe style="margin:0px; padding:0px; border:0px;" src="https://docs.google.com/presentation/d/e/2PACX-1vSl2p-dwrZIYUjLGga3qNEvq3V63lze7sxWHGQqrvgl7yyPHDL6vv5l62IU5D7Ra0c2N_AEblS7lF8F/embed?start=true&loop=true&delayms=10000&rm=minimal" frameborder="0" width="100%" height="1071px" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+        </div>
+        <div style="position:absolute; top:0px; height:1071px; width:6px; margin:auto; background-color:white; z-index:9999; margin-left:480px;"></div>
+    </body>
+</html>
