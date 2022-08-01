@@ -14,4 +14,4 @@ def printCommand(theCommand):
 
 jsonData = json.loads(readFile("secrets.json"))
 printCommand("curl https://tfl.gov.uk/tfl/syndication/feeds/serviceboard-fullscreen.htm --output www/index.html")
-printCommand("curl https://api.tfl.gov.uk/Line/northern/Arrivals?app_id=" + jsonData["tfl"]["app_id"] + "\&app_key=" + jsonData["tfl"]["app_key"] + " --output www/northernArrivals.json"
+printCommand("curl https://api.tfl.gov.uk/Line/northern/Arrivals?app_id=" + jsonData["tfl"]["app_id"] + "\&app_key=" + jsonData["tfl"]["app_key"] + " --output www/northernArrivals.json")
