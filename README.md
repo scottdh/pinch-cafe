@@ -8,7 +8,7 @@ This is a community project - we meet up in Pinch Cafe every other Thursday even
 
 ## Installation
 
-If you want a local development version installed on your local machine you will need [https://nodejs.org/en/](Node.js) and [https://www.11ty.dev/](Eleventy) installed.
+If you want a local development version installed on your local machine you will need [Node.js](https://nodejs.org/en/) and [Eleventy](https://www.11ty.dev/) installed.
 
 You can view the [hosted version](https://dev.sansay.co.uk/pinch-cafe) used by the kiosk machine in the cafe.
 
