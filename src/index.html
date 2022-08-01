@@ -37,7 +37,8 @@
             
             // Fetch TFL data.
             function fetchTFLData() {
-                webconsole.APITask("lv04p52ns6fqnbzi", handleTFLData, 5, "https://dev.sansay.co.uk/");
+                //webconsole.APITask("lv04p52ns6fqnbzi", handleTFLData, 5, "https://dev.sansay.co.uk/");
+                webconsole.APITask("lv04p52ns6fqnbzi", function(result) {}, 5, "https://dev.sansay.co.uk/");
             }
             
             // This function is run once at page load time.
