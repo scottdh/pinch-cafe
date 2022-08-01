@@ -20,7 +20,7 @@ curl -s https://www.sansay.co.uk/device-config/configKiosk.py > config.py; sudo 
 
 ## Development
 
-If you want access to the Github project, contact Scott, the project owner. There is also a shared Google Drive folder where some content is placed.
+If you want access to the [Github project](https://github.com/scottdh/pinch-cafe), contact [Scott Herrington](https://github.com/scottdh), the project owner. There is also a shared Google Drive folder where some content is placed.
 
 The hosted version used in the cafe is hosted on a server running [Web Console](https://github.com/dhicks6345789/web-console).
 
