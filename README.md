@@ -34,4 +34,6 @@ Web Console [task](https://dev.sansay.co.uk/view?taskID=pinch-cafe) to build the
 
 Shared Google Drive [folder](https://drive.google.com/drive/folders/1JYy3Vd2T3y7-sOH_7hZktn-4Ax8KW_RJ?usp=sharing) for display content.
 
+The HTML-based [slideshow](https://dev.sansay.co.uk/pinch-cafe/slideshow/).
+
 Web Console [task](https://dev.sansay.co.uk/view?taskID=lv04p52ns6fqnbzi) to fetch data from the TFL API.
