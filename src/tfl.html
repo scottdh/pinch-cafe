@@ -11,18 +11,18 @@
         <script src="https://dev.sansay.co.uk/webconsole.js"></script>
         
         <script>
-            // Fetch TFL data.
-            function fetchTFLData() {
-                webconsole.APITask("lv04p52ns6fqnbzi", getTFLData, 5, "https://dev.sansay.co.uk/");
+            // Fetch TFL data - trigger the server-side script that gets data (using secret API keys), call another function to format that data when it's ready.
+            const fetchTFLData = () => {
+                webconsole.APITask("lv04p52ns6fqnbzi", formatTFLData, 5, "https://dev.sansay.co.uk/");
             }
             
-            // Parse the TFL data, get it formatted on the page.
-            function getTFLData(result) {
-                //const travelData = JSON.parse(result);
+            // The data has been collected from TFL's servers, load it and pass along to another function for formatting.
+            const formatTFLData = (result) => {
                 fetch("https://dev.sansay.co.uk/lv04p52ns6fqnbzi/northernArrivals.json").then((response) => response.json()).then((data) => formatNorthernArrivals(data));
             }
             
-            function formatNorthernArrivals(theData) {
+            // Format the TFL data item by item.
+            const formatNorthernArrivals = (theData) => {
                 const element = document.getElementById('api_response_data');
                 
                 let response = '';
@@ -32,6 +32,7 @@
                 element.innerHTML = response;
             }
             
+            // Format each item of TFL data.
             const formatNorthernArrivalsItem = (item) => {
                 return `<div style='background-color: gray; color:white; margin: 5px; padding: 5px'>
                 <div><span>Start: </span><span>${item.stationName}</div>
@@ -42,7 +43,7 @@
             }
             
             // This function is run once at page load time.
-            function start() {
+            const start = () => {
                 // If we are hosting at dev.sansay.co.uk/pinch-cafe, if we don't have a trailing slash on the URL the CSS won't be found.
                 if (window.location.href == "https://dev.sansay.co.uk/pinch-cafe") {
                     window.location.replace("https://dev.sansay.co.uk/pinch-cafe/");
