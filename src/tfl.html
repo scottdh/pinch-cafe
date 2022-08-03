@@ -15,8 +15,10 @@
             var TFLDataFetchInterval;
             
             // Parse the TFL data, get it formatted on the page.
-            function handleTFLData(result) {
-                const travelData = JSON.parse(result);
+            function getTFLData(result) {
+                //const travelData = JSON.parse(result);
+                fetch("https://dev.sansay.co.uk/lv04p52ns6fqnbzi/northernArrivals.json").then((response) => response.json()).then((data) => console.log(data));
+                // const northernArrivalsData =
                 const element = document.getElementById('api_response_data');
                 
                 let response = '';
@@ -37,7 +39,7 @@
             
             // Fetch TFL data.
             function fetchTFLData() {
-                webconsole.APITask("lv04p52ns6fqnbzi", handleTFLData, 5, "https://dev.sansay.co.uk/");
+                webconsole.APITask("lv04p52ns6fqnbzi", getTFLData, 5, "https://dev.sansay.co.uk/");
             }
             
             // This function is run once at page load time.
