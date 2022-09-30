@@ -1,17 +1,17 @@
+@use "./design-tokens/generator";
+@use "./design-tokens/breakpoints";
+
 @use "./reset";
-@use "./fluid-type-scale";
+
 @use "./typography";
 
 /* Utilities */
-@use "./_utilities/flow";
-@use "./_utilities/wrapper";
-@use "./_utilities/sr-only";
+@use "./utilities/flow";
+@use "./utilities/wrapper";
+@use "./utilities/sr-only";
 
 /* Components */
 @use "./components/button";
-
-@import "./config";
-@import "../../node_modules/gorko/gorko.scss";
 
 body {
   background-color: var(--color-z0);
